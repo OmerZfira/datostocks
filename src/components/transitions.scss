@@ -1,0 +1,18 @@
+.stocks-row {
+     transition: all .5s;
+}
+
+.stocks-rows-enter-active, .stocks-rows-leave-active {
+     transition: all .5s ease;
+}
+
+.stocks-rows-move {
+    transition: all .5s ease;
+}
+
+.stocks-rows-enter, .stocks-rows-leave-to {
+    background-color: transparent;
+    border: none;
+    opacity: 0;
+    transform: translateY(-25px);
+}

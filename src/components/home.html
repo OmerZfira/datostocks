@@ -1,0 +1,49 @@
+<div class="home">
+
+    <h2> Datorama Stocks Management </h2>
+    <div class="header-container">
+        <div class="search-container">
+            <input v-model="stocksToSearch" @keyup.enter="getStocksData" name="stocksToSearch" type="text" placeholder="Search...">
+            <button @click="getStocksData">Search</button>
+        </div>
+        <div v-show="displayError" class="error-msg">
+            <i class="fa fa-times-circle"></i> {{error}}
+        </div>
+    </div>
+    <div class="data-display-container">
+        <div class="table-container">
+            <table class="table-fill">
+                <tr>
+                    <th>#</th>
+                    <th>symbol</th>
+                    <th>name</th>
+                    <th>previous close</th>
+                    <th>year low</th>
+                    <th>year high</th>
+                    <th>change from year low</th>
+                    <th>change from year high</th>
+                </tr>
+
+                <transition-group name="stocks-rows" tag="tbody">
+                    <tr v-for="(stock, index) in stocksData" :key="stock.symbol" @click="toggleGraphData(stock, $event)" 
+                        :class="{selected : stock.selected}" class="stocks-row">
+                        <td>{{index + 1}}</td>
+                        <td>{{stock.symbol}}</td>
+                        <td>{{stock.Name}}</td>
+                        <td>{{stock.PreviousClose}}</td>
+                        <td>{{stock.YearLow}}</td>
+                        <td>{{stock.YearHigh}}</td>
+                        <td :class="{negative : stock.ChangeFromYearLow < 0, positive : stock.ChangeFromYearLow > 0}">{{stock.ChangeFromYearLow}}</td>
+                        <td :class="{negative : stock.ChangeFromYearHigh < 0, positive : stock.ChangeFromYearHigh > 0}">{{stock.ChangeFromYearHigh}}</td>
+                    </tr>
+                </transition-group>
+            </table>
+
+        </div>
+
+        <div id="graph-container" class="graph-container">
+
+        </div>
+    </div>
+
+</div>
